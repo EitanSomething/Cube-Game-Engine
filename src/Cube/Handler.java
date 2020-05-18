@@ -1,3 +1,7 @@
+package Cube;
+
+import Cube.Game;
+
 public class Handler {
     private Game game;
 

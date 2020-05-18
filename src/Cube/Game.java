@@ -1,5 +1,7 @@
-import Window.CubeWindow;
+package Cube;
 
+import Cube.Window.CubeWindow;
+import Cube.State.State;
 public class Game implements Runnable{
 
     private CubeWindow display;
@@ -16,6 +18,11 @@ public class Game implements Runnable{
     }
     private void init(){
         display = new CubeWindow(title, width, height);
+    }
+    private void tick(){
+
+        if(State.getState() != null)
+            State.getState().tick();
     }
     public void run(){
 
