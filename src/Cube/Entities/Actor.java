@@ -1,11 +1,11 @@
 package Cube.Entities;
 
-import Cube.Handler;
 
+import Cube.Game;
 
 public abstract class Actor extends Entity {
-    public Actor(Handler handler, float x, float y, float accX, float accY, int width, int height) {
-        super(handler, x, y, accX, accY, width, height);
+    public Actor(Game game, float x, float y, float accX, float accY, int width, int height) {
+        super(game, x, y, accX, accY, width, height);
 
     }
 

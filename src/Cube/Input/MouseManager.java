@@ -1,6 +1,6 @@
 package Cube.Input;
 
-import Cube.Handler;
+import Cube.Game;
 import Cube.Window.CubeWindow;
 
 import java.awt.event.MouseEvent;
@@ -15,11 +15,11 @@ public class MouseManager implements MouseListener, MouseMotionListener {
     private int mouseX, mouseY;
     private int scroll;
 
-    private Handler handler;
+    private Game game;
     private CubeWindow window;
-    public MouseManager(Handler handler){
-        this.handler = handler;
-        window = handler.getGame().getWindow();
+    public MouseManager(Game game){
+        this.game = game;
+        window = game.getWindow();
         window.getFrame().addMouseListener(this);
         window.getFrame().addMouseMotionListener(this);
         window.getCanvas().addMouseListener(this);

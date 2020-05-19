@@ -1,6 +1,6 @@
 package Cube.Input;
 
-import Cube.Handler;
+import Cube.Game;
 import Cube.Window.CubeWindow;
 
 import java.awt.event.KeyEvent;
@@ -13,12 +13,13 @@ public class KeyboardManager implements KeyListener {
     private boolean[] keysLast = new boolean[NUM_KEYS];
 
 
-    private Handler handler;
+    private Game game;
+    private CubeWindow window;
 
-    public KeyboardManager(Handler handler){
-        this.handler = handler;
-        handler.getGame().getWindow().getCanvas().addKeyListener(this);
-
+    public KeyboardManager(Game game){
+        this.game = game;
+        window = game.getWindow();
+        window.getCanvas().addKeyListener(this);
     }
     public void update(){
         for(int i =0; i<NUM_KEYS;i++){
@@ -33,7 +34,7 @@ public class KeyboardManager implements KeyListener {
         return !keys[keyCode] && keysLast[keyCode];
     }
     public boolean isKeyDown(int keyCode){
-        return keys[keyCode] && keysLast[keyCode];
+        return keys[keyCode] && !keysLast[keyCode];
     }
 
     @Override
@@ -49,7 +50,6 @@ public class KeyboardManager implements KeyListener {
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         keys[keyEvent.getKeyCode()] = false;
-
     }
 
 }

@@ -1,10 +1,11 @@
 package Cube.Entities;
 
+import Cube.Game;
+
 import java.awt.*;
-import Cube.Handler;
 
 public abstract class Entity {
-    protected Handler handler;
+    protected Game game;
     protected float x, y;
     protected float accX, accY;
     protected int width, height;
@@ -12,8 +13,8 @@ public abstract class Entity {
     protected boolean active = true;
     protected Rectangle bounds;
 
-    public Entity(Handler handler, float x, float y, float accX, float accY, int width, int height){
-        this.handler = handler;
+    public Entity(Game game, float x, float y, float accX, float accY, int width, int height){
+        this.game = game;
         this.x = x;
         this.y = y;
         this.width = width;

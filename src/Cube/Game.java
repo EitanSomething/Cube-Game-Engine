@@ -4,20 +4,19 @@ import Cube.Input.KeyboardManager;
 import Cube.Input.MouseManager;
 import Cube.Window.CubeWindow;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Game implements Runnable{
     private CubeWindow window;
     private int width, height;
     public String title;
-    private float scale = 4f;
-    private boolean running = false;
-    private final double UPDATE_CAP = 1.0/60.0;
+    private int scale = 2;
 
+    private boolean running = false;
+    private final double UPDATE_CAP = 1.0/30.0;
 
     private Thread thread;
-    private Handler handler;
+
     private KeyboardManager keyManager;
     private MouseManager mouseManager;
 
@@ -25,8 +24,6 @@ public class Game implements Runnable{
         this.width = width;
         this.height = height;
         this.title = title;
-        handler = new Handler(this);
-
 
     }
 
@@ -37,7 +34,7 @@ public class Game implements Runnable{
     public int getHeight(){
         return height;
     }
-    public float getScale(){
+    public int getScale(){
         return scale;
     }
 
@@ -45,8 +42,8 @@ public class Game implements Runnable{
         return window;
     }
     public void start(){
-        window = new CubeWindow(title,width,height);
-        keyManager = new KeyboardManager(handler);
+        window = new CubeWindow(this, title,width,height);
+        keyManager = new KeyboardManager(this);
 
         thread = new Thread(this);
         thread.run();
@@ -74,7 +71,7 @@ public class Game implements Runnable{
             while(unprocessedTime >= UPDATE_CAP){
                 unprocessedTime-=UPDATE_CAP;
                 render = true;
-                if(keyManager.isKeyDown(KeyEvent.VK_A)){
+                if(keyManager.isKey(KeyEvent.VK_A)){
                     System.out.println("A key is pressed");
                 }
                 keyManager.update();
@@ -88,7 +85,6 @@ public class Game implements Runnable{
             if(render){
                 frames++;
                 window.update();
-
             }
             else{
                 try{
