@@ -12,7 +12,6 @@ public class KeyboardManager implements KeyListener {
     private boolean[] keys = new boolean[NUM_KEYS];
     private boolean[] keysLast = new boolean[NUM_KEYS];
 
-
     private Game game;
     private CubeWindow window;
 
@@ -23,9 +22,7 @@ public class KeyboardManager implements KeyListener {
     }
 
     public void update(){
-        for(int i =0; i<NUM_KEYS;i++){
-            keysLast[i] = keys[i];
-        }
+        keysLast = keys;
     }
 
     @Override

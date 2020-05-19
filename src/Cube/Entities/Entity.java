@@ -26,6 +26,8 @@ public abstract class Entity {
     public abstract void tick();
 
     public abstract void render(Graphics g);
+
+    //Getters and Setters
     public float getLocX(){
         return x;
     }

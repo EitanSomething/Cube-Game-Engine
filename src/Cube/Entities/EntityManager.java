@@ -7,10 +7,9 @@ public class EntityManager {
     private Handler handler;
     private ArrayList<Entity> entities;
 
-
     public EntityManager(Handler handler){
         this.handler = handler;
-        entities = new ArrayList<Entity>();
+        entities = new ArrayList<>();
     }
 
     public void tick(){
@@ -28,7 +27,7 @@ public class EntityManager {
         entities.add(e);
     }
 
-
+    //Getters and Setters
     public Handler getHandler() {
         return handler;
     }

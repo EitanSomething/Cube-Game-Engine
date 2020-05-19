@@ -15,6 +15,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 
     private Game game;
     private CubeWindow window;
+
     public MouseManager(Game game){
         this.game = game;
         window = game.getWindow();
@@ -26,9 +27,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 
     public void update(){
         scroll = 0;
-        for(int i =0; i<NUM_BUTTONS; i++){
-            buttonsLast[i] = buttons[i];
-        }
+        buttonsLast = buttons;
     }
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
@@ -38,7 +37,6 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         buttons[mouseEvent.getButton()] = false;
-
     }
 
     @Override
@@ -51,7 +49,6 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
     public void mouseMoved(MouseEvent mouseEvent) {
         mouseX = (int)(mouseEvent.getX() / game.getScale());
         mouseY = (int)(mouseEvent.getY() / game.getScale());
-
     }
 
     @Override
