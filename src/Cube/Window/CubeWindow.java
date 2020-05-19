@@ -25,11 +25,13 @@ public class CubeWindow {
         this.height = height;
         canvas = new Canvas();
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Dimension s = new Dimension(width*game.getScale(),height*game.getScale());
+        Dimension s = new Dimension((int)(width*game.getScale()),(int)(height*game.getScale()));
+
         canvas.setPreferredSize(s);
         canvas.setMaximumSize(s);
         canvas.setMinimumSize(s);
         canvas.setFocusable(true);
+
         frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());

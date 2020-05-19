@@ -10,7 +10,7 @@ public class Game implements Runnable{
     private CubeWindow window;
     private int width, height;
     public String title;
-    private int scale = 2;
+    private float scale = 2.0f;
 
     private boolean running = false;
     private final double UPDATE_CAP = 1.0/30.0;
@@ -24,9 +24,7 @@ public class Game implements Runnable{
         this.width = width;
         this.height = height;
         this.title = title;
-
     }
-
 
     public int getWidth(){
         return width;
@@ -34,7 +32,7 @@ public class Game implements Runnable{
     public int getHeight(){
         return height;
     }
-    public int getScale(){
+    public float getScale(){
         return scale;
     }
 
@@ -44,7 +42,7 @@ public class Game implements Runnable{
     public void start(){
         window = new CubeWindow(this, title,width,height);
         keyManager = new KeyboardManager(this);
-
+        mouseManager = new MouseManager(this);
         thread = new Thread(this);
         thread.run();
     }
@@ -71,10 +69,11 @@ public class Game implements Runnable{
             while(unprocessedTime >= UPDATE_CAP){
                 unprocessedTime-=UPDATE_CAP;
                 render = true;
-                if(keyManager.isKey(KeyEvent.VK_A)){
-                    System.out.println("A key is pressed");
-                }
+                System.out.println("x: " + mouseManager.getMouseX());
+                System.out.println("y: " + mouseManager.getMouseY());
+
                 keyManager.update();
+                mouseManager.update();
                 if(frameTime >=1.0){
                     frameTime = 0;
                     fps = frames;
@@ -94,7 +93,6 @@ public class Game implements Runnable{
                     e.printStackTrace();
                 }
             }
-
         }
         stop();
     }

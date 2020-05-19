@@ -21,25 +21,11 @@ public class KeyboardManager implements KeyListener {
         window = game.getWindow();
         window.getCanvas().addKeyListener(this);
     }
+
     public void update(){
         for(int i =0; i<NUM_KEYS;i++){
             keysLast[i] = keys[i];
         }
-    }
-
-    public boolean isKey(int keyCode){
-        return keys[keyCode];
-    }
-    public boolean isKeyUp(int keyCode){
-        return !keys[keyCode] && keysLast[keyCode];
-    }
-    public boolean isKeyDown(int keyCode){
-        return keys[keyCode] && !keysLast[keyCode];
-    }
-
-    @Override
-    public void keyTyped(KeyEvent keyEvent) {
-
     }
 
     @Override
@@ -52,4 +38,21 @@ public class KeyboardManager implements KeyListener {
         keys[keyEvent.getKeyCode()] = false;
     }
 
+    //Getters and Setters
+    public boolean isKey(int keyCode){
+        return keys[keyCode];
+    }
+    public boolean isKeyUp(int keyCode){
+        return !keys[keyCode] && keysLast[keyCode];
+    }
+    public boolean isKeyDown(int keyCode){
+        return keys[keyCode] && !keysLast[keyCode];
+    }
+
+
+    //UNUSED
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
 }
