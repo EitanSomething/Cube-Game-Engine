@@ -9,15 +9,11 @@ import java.awt.event.KeyListener;
 
 public class KeyboardManager implements KeyListener {
     private final int NUM_KEYS = 256;
-    private boolean[] keys = new boolean[NUM_KEYS];
+    private final boolean[] keys = new boolean[NUM_KEYS];
     private boolean[] keysLast = new boolean[NUM_KEYS];
 
-    private Game game;
-    private CubeWindow window;
-
     public KeyboardManager(Game game){
-        this.game = game;
-        window = game.getWindow();
+        CubeWindow window = game.getWindow();
         window.getCanvas().addKeyListener(this);
     }
 

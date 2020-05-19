@@ -7,18 +7,17 @@ import java.awt.event.*;
 
 public class MouseManager implements MouseListener, MouseMotionListener, MouseWheelListener {
     private final int NUM_BUTTONS = 5;
-    private boolean[] buttons = new boolean[NUM_BUTTONS];
+    private final boolean[] buttons = new boolean[NUM_BUTTONS];
     private boolean[] buttonsLast = new boolean[NUM_BUTTONS];
 
     private int mouseX, mouseY;
     private int scroll;
 
-    private Game game;
-    private CubeWindow window;
+    private final Game game;
 
     public MouseManager(Game game){
         this.game = game;
-        window = game.getWindow();
+        CubeWindow window = game.getWindow();
         window.getFrame().addMouseListener(this);
         window.getFrame().addMouseMotionListener(this);
         window.getCanvas().addMouseListener(this);

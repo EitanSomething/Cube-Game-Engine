@@ -9,18 +9,15 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 public class CubeWindow {
-    private JFrame frame;
-    private BufferedImage image;
-    private Canvas canvas;
-    private BufferStrategy bs;
-    private Graphics g;
+    private final JFrame frame;
+    private final BufferedImage image;
+    private final Canvas canvas;
+    private final BufferStrategy bs;
+    private final Graphics g;
 
-    private String title;
-    private int width, height;
-    private Game game;
+    private final int width, height;
+
     public CubeWindow(Game game,String title, int width, int height){
-        this.game = game;
-        this.title = title;
         this.width = width;
         this.height = height;
         canvas = new Canvas();
