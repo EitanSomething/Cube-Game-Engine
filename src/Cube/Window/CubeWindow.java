@@ -1,12 +1,11 @@
 package Cube.Window;
 
-import Cube.Game;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-
 public class CubeWindow {
     private JFrame frame;
     private BufferedImage image;
@@ -17,16 +16,17 @@ public class CubeWindow {
     private String title;
     private int width, height;
 
-    public CubeWindow(Game game, String title, int width, int height){
+    public CubeWindow(String title, int width, int height){
         this.title = title;
         this.width = width;
         this.height = height;
+        canvas = new Canvas();
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Dimension s = new Dimension((int)(width * 1),(height*1));
+        Dimension s = new Dimension((int)(width),(height));
         canvas.setPreferredSize(s);
         canvas.setMaximumSize(s);
-        canvas.setMaximumSize(s);
-
+        canvas.setMinimumSize(s);
+        canvas.requestFocus();
         frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());

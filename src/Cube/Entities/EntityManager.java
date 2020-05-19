@@ -3,7 +3,6 @@ package Cube.Entities;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.logging.Handler;
-
 public class EntityManager {
     private Handler handler;
     private ArrayList<Entity> entities;

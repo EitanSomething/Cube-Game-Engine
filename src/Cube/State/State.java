@@ -1,7 +1,8 @@
 package Cube.State;
 
-import java.awt.*;
 import Cube.Game;
+
+import java.awt.*;
 public abstract class State {
 
     private static State currentState = null;
