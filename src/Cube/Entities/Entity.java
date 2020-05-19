@@ -31,4 +31,13 @@ public abstract class Entity {
     public float getLocY(){
         return y;
     }
+    public float getAccXX(){
+        return accX;
+    }
+    public float getAccYY(){
+        return accY;
+    }
+    public Rectangle getBounds(){
+        return bounds;
+    }
 }

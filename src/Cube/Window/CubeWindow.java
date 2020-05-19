@@ -1,40 +1,50 @@
 package Cube.Window;
 
+import Cube.Game;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class CubeWindow {
     private JFrame frame;
+    private BufferedImage image;
     private Canvas canvas;
+    private BufferStrategy bs;
+    private Graphics g;
 
     private String title;
     private int width, height;
 
-    public CubeWindow(String title, int width, int height){
+    public CubeWindow(Game game, String title, int width, int height){
         this.title = title;
         this.width = width;
         this.height = height;
-        createDisplay();
-    }
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Dimension s = new Dimension((int)(width * 1),(height*1));
+        canvas.setPreferredSize(s);
+        canvas.setMaximumSize(s);
+        canvas.setMaximumSize(s);
 
-    private void createDisplay(){
         frame = new JFrame(title);
-        frame.setSize(width, height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
+        frame.setLayout(new BorderLayout());
+        frame.add(canvas, BorderLayout.CENTER);
+        frame.pack();
         frame.setLocationRelativeTo(null);
+        frame.setResizable(false);
         frame.setVisible(true);
 
-        canvas = new Canvas();
-        canvas.setPreferredSize(new Dimension(width, height));
-        canvas.setMaximumSize(new Dimension(width, height));
-        canvas.setMinimumSize(new Dimension(width, height));
-        canvas.setFocusable(false);
-
-        frame.add(canvas);
-        frame.pack();
+        canvas.createBufferStrategy(2);
+        bs = canvas.getBufferStrategy();
+        g = bs.getDrawGraphics();
     }
 
+    public void update(){
+        g.drawImage(image,0,0,width, height, null);
+        bs.show();
+    }
     public Canvas getCanvas(){
         return canvas;
     }

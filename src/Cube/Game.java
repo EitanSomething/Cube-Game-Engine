@@ -1,64 +1,42 @@
 package Cube;
 
+import Cube.Input.KeyboardManager;
+import Cube.Input.MouseManager;
 import Cube.Window.CubeWindow;
 import Cube.State.State;
+
+import java.awt.event.KeyEvent;
+
 public class Game implements Runnable{
 
-    private CubeWindow display;
+    private CubeWindow window;
     private int width, height;
     public String title;
 
     private boolean running = false;
-    private Thread thread;
+    private final double UPDATE_CAP = 1.0/60.0;
 
+
+    private Thread thread;
+    private Handler handler;
+    private KeyboardManager keyManager;
+    private MouseManager mouseManager;
     public Game(String title, int width, int height){
         this.width = width;
         this.height = height;
         this.title = title;
+        handler = new Handler(this);
+        keyManager = new KeyboardManager(handler);
+        mouseManager = new MouseManager(handler);
     }
-    private void init(){
-        display = new CubeWindow(title, width, height);
-    }
+
     private void tick(){
-
-        if(State.getState() != null)
-            State.getState().tick();
-    }
-    public void run(){
-
-        init();
-
-        int fps = 60;
-        double timePerTick = 1000000000 / fps;
-        double delta = 0;
-        long now;
-        long lastTime = System.nanoTime();
-        long timer = 0;
-        int ticks = 0;
-
-        while(running){
-            now = System.nanoTime();
-            delta += (now - lastTime) / timePerTick;
-            timer += now - lastTime;
-            lastTime = now;
-
-            if(delta >= 1){
-
-                ticks++;
-                delta--;
-            }
-
-            if(timer >= 1000000000){
-                System.out.println("Ticks and Frames: " + ticks);
-                ticks = 0;
-                timer = 0;
-            }
+        if(keyManager.isKeyDown(KeyEvent.VK_X)){
+            System.out.println("Key");
         }
-
-        stop();
+        keyManager.update();
 
     }
-
 
     public int getWidth(){
         return width;
@@ -66,22 +44,64 @@ public class Game implements Runnable{
     public int getHeight(){
         return height;
     }
-
+    public CubeWindow getWindow(){
+        return window;
+    }
     public synchronized void start(){
-        if(running)
-            return;
-        running = true;
+        window = new CubeWindow(this, title, width, height);
+
         thread = new Thread(this);
         thread.start();
     }
     public synchronized void stop(){
-        if(!running)
-            return;
-        running = false;
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+    }
+    public void run(){
+        running = true;
+        boolean render = false;
+        double firstTime = 0;
+        double lastTime = System.nanoTime() / 100000000.0;
+        double passedTime = 0;
+        double unprocessedTime = 0;
+
+        double frameTime = 0;
+        int frames = 0;
+        int fps = 0;
+        while(running){
+            firstTime = System.nanoTime() / 100000000.0;
+            passedTime = firstTime - lastTime;
+            lastTime = firstTime;
+
+            unprocessedTime += passedTime;
+            while(unprocessedTime >= UPDATE_CAP){
+                unprocessedTime-=UPDATE_CAP;
+                render = true;
+                if(keyManager.isKeyDown((KeyEvent.VK_A))){
+                    System.out.println("A is pressed");
+                }
+                keyManager.update();
+                if(frameTime >=1.0){
+                    frameTime = 0;
+                    fps = frames;
+                    frames = 0;
+                    System.out.println("FPS " + fps);
+                }
+            }
+            if(render){
+                frames++;
+                window.update();
+
+            }
+            else{
+                try{
+                    Thread.sleep(1);
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+
         }
+        stop();
     }
 }
