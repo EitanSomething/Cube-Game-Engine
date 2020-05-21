@@ -6,11 +6,11 @@ import java.awt.*;
 
 public abstract class Entity {
     protected Game game;
-    protected float x, y;
+    protected float x;
+    protected float y;
     protected float accX, accY;
-    protected int width, height;
-    protected int health;
-    protected boolean active = true;
+    protected int width;
+    protected int height;
     protected Rectangle bounds;
 
     public Entity(Game game, float x, float y, float accX, float accY, int width, int height){

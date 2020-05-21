@@ -4,21 +4,18 @@ import Cube.Input.KeyboardManager;
 import Cube.Input.MouseManager;
 import Cube.Window.CubeWindow;
 
-import java.awt.event.KeyEvent;
 
 public class Game implements Runnable{
     private CubeWindow window;
-    private int width, height;
-    public String title;
+    private final int width, height;
+    public final String title;
     private float scale = 2.0f;
-
+    private double UPDATE_CAP = 1.0 / 60.0;
     private boolean running = false;
-    private final double UPDATE_CAP = 1.0/30.0;
-
-    private Thread thread;
 
     private KeyboardManager keyManager;
     private MouseManager mouseManager;
+    private Thread thread = new Thread(this);
 
     public Game(String title, int width, int height){
         this.width = width;
@@ -40,11 +37,11 @@ public class Game implements Runnable{
         return window;
     }
     public void start(){
+        thread = new Thread(this);
         window = new CubeWindow(this, title,width,height);
         keyManager = new KeyboardManager(this);
         mouseManager = new MouseManager(this);
-        thread = new Thread(this);
-        thread.run();
+        thread.start();
     }
     public void stop(){
 
@@ -64,17 +61,16 @@ public class Game implements Runnable{
             firstTime = System.nanoTime() / 100000000.0;
             passedTime = firstTime - lastTime;
             lastTime = firstTime;
-            frameTime+=passedTime;
+            frameTime += passedTime;
             unprocessedTime += passedTime;
             while(unprocessedTime >= UPDATE_CAP){
-                unprocessedTime-=UPDATE_CAP;
+                unprocessedTime-= UPDATE_CAP;
                 render = true;
-                System.out.println("x: " + mouseManager.getMouseX());
-                System.out.println("y: " + mouseManager.getMouseY());
 
                 keyManager.update();
                 mouseManager.update();
-                if(frameTime >=1.0){
+
+                if(frameTime >= 1.0){
                     frameTime = 0;
                     fps = frames;
                     frames = 0;
@@ -82,8 +78,9 @@ public class Game implements Runnable{
                 }
             }
             if(render){
+                System.out.println("Render " + fps);
                 frames++;
-                window.update();
+                render = false;
             }
             else{
                 try{

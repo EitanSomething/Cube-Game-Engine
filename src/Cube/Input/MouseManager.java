@@ -6,8 +6,8 @@ import Cube.Window.CubeWindow;
 import java.awt.event.*;
 
 public class MouseManager implements MouseListener, MouseMotionListener, MouseWheelListener {
-    private final int NUM_BUTTONS = 5;
-    private final boolean[] buttons = new boolean[NUM_BUTTONS];
+    private int NUM_BUTTONS = 5;
+    private boolean[] buttons = new boolean[NUM_BUTTONS];
     private boolean[] buttonsLast = new boolean[NUM_BUTTONS];
 
     private int mouseX, mouseY;

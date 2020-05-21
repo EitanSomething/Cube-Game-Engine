@@ -8,8 +8,8 @@ import java.awt.event.KeyListener;
 
 
 public class KeyboardManager implements KeyListener {
-    private final int NUM_KEYS = 256;
-    private final boolean[] keys = new boolean[NUM_KEYS];
+    private int NUM_KEYS = 256;
+    private boolean[] keys = new boolean[NUM_KEYS];
     private boolean[] keysLast = new boolean[NUM_KEYS];
 
     public KeyboardManager(Game game){
