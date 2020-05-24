@@ -15,27 +15,24 @@ public class CubeWindow {
     private final BufferStrategy bs;
     private final Graphics g;
 
-    private final int width, height;
 
-    public CubeWindow(Game game,String title, int width, int height){
-        this.width = width;
-        this.height = height;
+    public CubeWindow(Game game){
+        image = new BufferedImage(game.getWidth(), game.getHeight(), BufferedImage.TYPE_INT_RGB);
         canvas = new Canvas();
-        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Dimension s = new Dimension((int)(width*game.getScale()),(int)(height*game.getScale()));
+        Dimension s = new Dimension((int)(game.getWidth() * game.getScale()),(int)(game.getHeight() * game.getScale()));
 
         canvas.setPreferredSize(s);
         canvas.setMaximumSize(s);
         canvas.setMinimumSize(s);
         canvas.setFocusable(true);
 
-        frame = new JFrame(title);
+        frame = new JFrame(game.getTitle());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.add(canvas, BorderLayout.CENTER);
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setVisible(true);
 
         canvas.createBufferStrategy(2);
@@ -44,7 +41,7 @@ public class CubeWindow {
     }
 
     public void update(){
-        g.drawImage(image,0,0,width, height, null);
+        g.drawImage(image,0,0,canvas.getWidth(), canvas.getHeight(), null);
         bs.show();
     }
     public Canvas getCanvas(){
@@ -53,5 +50,8 @@ public class CubeWindow {
 
     public JFrame getFrame(){
         return frame;
+    }
+    public BufferedImage getImage(){
+        return image;
     }
 }
