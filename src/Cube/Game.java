@@ -81,6 +81,8 @@ public class Game implements Runnable{
                 unprocessedTime -= UPDATE_CAP;
                 render = true;
 
+                keyManager.update();
+                mouseManager.update();
                 if(frameTime >= 1.0){
                     frameTime = 0;
                     fps = frames;
