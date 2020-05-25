@@ -8,9 +8,6 @@ import Cube.Window.Renderer;
 
 public class Game implements Runnable{
     private CubeWindow window;
-
-
-
     private Renderer renderer;
     private KeyboardManager keyManager;
     private MouseManager mouseManager;
@@ -23,7 +20,8 @@ public class Game implements Runnable{
 
     private final int width, height;
     private final String title;
-    public Game(AbstractGame game, String title,float scale, int width, int height){
+
+    public Game(AbstractGame game, String title, float scale, int width, int height){
         this.game = game;
         this.scale = scale;
         this.width = width;
@@ -86,7 +84,7 @@ public class Game implements Runnable{
             while(unprocessedTime >= UPDATE_CAP){
                 unprocessedTime -= UPDATE_CAP;
                 render = true;
-
+                game.update(this,(float)UPDATE_CAP);
                 keyManager.update();
                 mouseManager.update();
                 if(frameTime >= 1.0){
@@ -114,6 +112,7 @@ public class Game implements Runnable{
     }
     private void render(){
         renderer.clear();
+        game.render(this,renderer);
         window.update();
     }
 }
