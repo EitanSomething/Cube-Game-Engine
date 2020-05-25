@@ -45,6 +45,14 @@ public class Game implements Runnable{
     public String getTitle(){
         return title;
     }
+
+    public KeyboardManager getKeyManager() {
+        return keyManager;
+    }
+    public MouseManager getMouseManager(){
+        return mouseManager;
+    }
+
     public void start(){
         window = new CubeWindow(this);
         renderer = new Renderer(this);
