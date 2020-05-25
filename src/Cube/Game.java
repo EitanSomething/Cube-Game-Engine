@@ -8,17 +8,23 @@ import Cube.Window.Renderer;
 
 public class Game implements Runnable{
     private CubeWindow window;
-    private final int width, height;
-    public final String title;
-    private float scale;
-    private double UPDATE_CAP = 1.0 / 60.0;
-    private boolean running = false;
+
+
+
     private Renderer renderer;
     private KeyboardManager keyManager;
     private MouseManager mouseManager;
-    private Thread thread = new Thread(this);
+    private Thread thread;
+    private AbstractGame game;
 
-    public Game(String title,float scale, int width, int height){
+    private float scale;
+    private double UPDATE_CAP = 1.0 / 60.0;
+    private boolean running = false;
+
+    private final int width, height;
+    private final String title;
+    public Game(AbstractGame game, String title,float scale, int width, int height){
+        this.game = game;
         this.scale = scale;
         this.width = width;
         this.height = height;
@@ -92,13 +98,12 @@ public class Game implements Runnable{
             }
 
             if(render){
-                renderer.clear();
-                window.update();
                 frames++;
+                render();
             }
             else{
                 try{
-                    Thread.sleep(1);
+                    Thread.sleep(2);
                 }
                 catch (InterruptedException e){
                     e.printStackTrace();
@@ -106,5 +111,9 @@ public class Game implements Runnable{
             }
         }
         stop();
+    }
+    private void render(){
+        renderer.clear();
+        window.update();
     }
 }

@@ -35,7 +35,7 @@ public class CubeWindow {
         frame.setResizable(false);
         frame.setVisible(true);
 
-        canvas.createBufferStrategy(2);
+        canvas.createBufferStrategy(3);
         bs = canvas.getBufferStrategy();
         g = bs.getDrawGraphics();
     }
