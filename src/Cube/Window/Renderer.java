@@ -1,5 +1,6 @@
 package Cube.Window;
 import Cube.Game;
+import Cube.IO.Image;
 
 import java.awt.image.DataBufferInt;
 
@@ -14,6 +15,19 @@ public class Renderer {
     public void clear(){
         for(int i = 0; i< pixel.length; i++){
             pixel[i] = 0;
+        }
+    }
+    public  void setPixel(int x, int y, int value){
+        if((x < 0 || x>= pixelWidth || y < 0 || y >=pixelHeight) || value == 0xffff){
+            return;
+        }
+        pixel[x+y *pixelWidth] = value;
+    }
+    public void drawImage(Image image, int offX, int offY){
+        for(int y =0;y<image.getHeight(); y++){
+            for(int x =0; x<image.getWidth(); x++){
+                setPixel(x+offX,y+offY,image.getPixel()[x+y*image.getWidth()]);
+            }
         }
     }
 }

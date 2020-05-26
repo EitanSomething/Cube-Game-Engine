@@ -38,6 +38,7 @@ public class CubeWindow {
         canvas.createBufferStrategy(3);
         bs = canvas.getBufferStrategy();
         g = bs.getDrawGraphics();
+
     }
 
     public void update(){
