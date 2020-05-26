@@ -3,6 +3,7 @@ import Cube.Game;
 import Cube.IO.Image;
 
 import java.awt.image.DataBufferInt;
+import java.util.Arrays;
 
 public class Renderer {
     private int pixelWidth, pixelHeight;
@@ -13,9 +14,7 @@ public class Renderer {
         pixel = ((DataBufferInt)game.getWindow().getImage().getRaster().getDataBuffer()).getData();
     }
     public void clear(){
-        for(int i = 0; i< pixel.length; i++){
-            pixel[i] = 0;
-        }
+        Arrays.fill(pixel, 0);
     }
     public  void setPixel(int x, int y, int value){
         if((x < 0 || x>= pixelWidth || y < 0 || y >=pixelHeight) || value == 0xffff){
