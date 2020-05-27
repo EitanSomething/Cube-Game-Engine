@@ -55,4 +55,10 @@ public class CubeWindow {
     public BufferedImage getImage(){
         return image;
     }
+    public int getWidth(){
+        return canvas.getWidth();
+    }
+    public int getHeight(){
+        return canvas.getHeight();
+    }
 }
