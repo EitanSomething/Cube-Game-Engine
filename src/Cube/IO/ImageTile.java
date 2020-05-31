@@ -1,0 +1,25 @@
+package Cube.IO;
+
+public class ImageTile extends Image{
+    private int tileWidth, tileHeight;
+    public ImageTile(String path, int tileWidth, int tileHeight){
+        super(path);
+        this.tileWidth = tileWidth;
+        this.tileHeight = tileHeight;
+    }
+
+
+    public int getTileWidth() {
+        return tileWidth;
+    }
+
+    public int getTileHeight() {
+        return tileHeight;
+    }
+    public void setTileWidth(int tileWidth){
+        this.tileWidth = tileWidth;
+    }
+    public void setTileHeight(int tileHeight){
+        this.tileHeight = tileHeight;
+    }
+}
