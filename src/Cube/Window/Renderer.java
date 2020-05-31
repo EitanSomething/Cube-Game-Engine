@@ -27,15 +27,17 @@ public class Renderer {
     }
     public void drawImage(Image image, int offX, int offY){
 
+        //Off Screen don't render
+        if(offX <-image.getWidth())return;
+        if(offY <-image.getHeight())return;
+        if(offX >= pixelWidth) return;
+        if(offY >= pixelHeight) return;
+
         int newY = 0;
         int newX =0;
         int newWidth = image.getWidth();
         int newHeight = image.getHeight();
-        //Off Screen don't render
-        if(offX <-newWidth)return;
-        if(offY <-newHeight)return;
-        if(offX >= pixelWidth) return;
-        if(offY >= pixelHeight) return;
+
 
         //Clipping code
         if(offX < 0){
