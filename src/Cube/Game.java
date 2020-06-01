@@ -81,7 +81,7 @@ public class Game implements Runnable{
         int fps = 0;
 
         while(running){
-            render = false;
+            render = true;
             firstTime = System.nanoTime() / 1000000000.0;
             passedTime = firstTime - lastTime;
             lastTime = firstTime;
@@ -99,7 +99,6 @@ public class Game implements Runnable{
                     frameTime = 0;
                     fps = frames;
                     frames = 0;
-                    System.out.println("Fps" + fps);
 
                     System.out.println("Fps" + fps);
                 }
