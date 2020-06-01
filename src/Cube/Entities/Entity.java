@@ -1,10 +1,11 @@
 package Cube.Entities;
 
 import Cube.Game;
+import Cube.Timer.Tick;
 
 import java.awt.*;
 
-public abstract class Entity {
+public abstract class Entity implements Tick {
     protected Game game;
     protected float x;
     protected float y;
@@ -23,10 +24,18 @@ public abstract class Entity {
         bounds = new Rectangle(0, 0, width, height);
 
     }
-    public abstract void tick();
+    @Override
+    public void Tick(){
+    }
 
-    public abstract void render(Graphics g);
-
+    public void useTick(boolean tickable){
+        if(tickable){
+            Game.AddToList(this);
+        }
+        else{
+            Game.RemoveFromList(this);
+        }
+    }
     //Getters and Setters
     public float getLocX(){
         return x;

@@ -11,18 +11,6 @@ public class EntityManager {
         this.handler = handler;
         entities = new ArrayList<>();
     }
-
-    public void tick(){
-        for(Entity entity:entities) {
-            entity.tick();
-
-        }
-    }
-    public void render(Graphics g){
-        for(Entity e : entities){
-            e.render(g);
-        }
-    }
     public void addEntity(Entity e){
         entities.add(e);
     }

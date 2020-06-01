@@ -2,8 +2,12 @@ package Cube;
 
 import Cube.Input.KeyboardManager;
 import Cube.Input.MouseManager;
+import Cube.Timer.Tick;
 import Cube.Window.CubeWindow;
 import Cube.Window.Renderer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Game implements Runnable{
@@ -20,7 +24,13 @@ public class Game implements Runnable{
 
     private final int width, height;
     private final String title;
-
+    public static List<Tick> tick = new ArrayList<Tick>();
+    public static void AddToList(Tick listItem){
+        tick.add(listItem);
+    }
+    public static void RemoveFromList(Tick listItem){
+        tick.remove(listItem);
+    }
     public Game(AbstractGame game, String title, float scale, int width, int height){
         this.game = game;
         this.scale = scale;
@@ -92,6 +102,10 @@ public class Game implements Runnable{
             while(unprocessedTime >= UPDATE_CAP){
                 unprocessedTime -= UPDATE_CAP;
                 render = true;
+                for(Tick runTick : tick) {
+                    runTick.Tick();
+                    System.out.println(runTick);
+                }
                 game.update(this,(float)UPDATE_CAP);
                 keyManager.update();
                 mouseManager.update();
